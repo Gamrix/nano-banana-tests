@@ -8,6 +8,4 @@ test_notebooks/
 .vscode/
 __pycache__/
 .ipynb_checkpoints
-gemimg.egg-info/
-dist/
-build/
+/gen_imgs
