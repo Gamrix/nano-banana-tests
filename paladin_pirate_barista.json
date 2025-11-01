@@ -6,7 +6,11 @@
     "age_appearance": "looks late 20s, perhaps slightly fatigued",
     "ethnicity": "Three-quarters Caucasian/Polish, One-quarter Maori",
     "nationality_origin": "San Francisco, California",
-    "character_classes": ["Paladin", "Pirate", "Starbucks Barista"]
+    "character_classes": [
+      "Paladin",
+      "Pirate",
+      "Starbucks Barista"
+    ]
   },
   "background": {
     "background": "Born to a long line of financiers who believed commerce was the highest form of piety, Thaddeus was raised among the towering glass temples of San Francisco's financial district. He received rigorous, high-society training intended to mold him into a beacon of corporate virtue, destined to uphold the legacy of his family's wealth and moral standing. However, a deep yearning for adventure and high-seas freedom clashed with his gilded upbringing, setting him on a path of luxurious self-discovery and spiritual confusion.",
@@ -57,7 +61,9 @@
     },
     "hair": {
       "primary_color": "dark brown",
-      "secondary_colors": ["lighter chestnut streaks"],
+      "secondary_colors": [
+        "lighter chestnut streaks"
+      ],
       "color_distribution": "natural sun-kissed highlights throughout the mass of hair",
       "length": "shoulder-length",
       "style": "Shoulder-length straight hair styled into a bizarre, highly sculpted, rigid 'helmet' of perfect locks that frames his wide head and narrow face, kept immaculate with expensive product.",
@@ -156,7 +162,11 @@
     "visible_injuries_overall": null
   },
   "visual_design": {
-    "primary_colors": ["#006633", "#1E1E1E", "#FFD700"],
+    "primary_colors": [
+      "#006633",
+      "#1E1E1E",
+      "#FFD700"
+    ],
     "color_scheme_description": "The design is dominated by Starbucks Green (#006633) representing the Barista role and its modern corporate nature. This is contrasted with Deep Black/Navy (1E1E1E) for the Pirate's dramatic flair and the Gold/Brass (FFD700) detailing for the Paladin's expensive, pious dedication. The overall feel is one of expensive, slightly ridiculous corporate zeal.",
     "notable_visual_features": [
       "Extremely wide, helmet-like hair volume and large head",
