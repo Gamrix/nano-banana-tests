@@ -1,0 +1,180 @@
+{
+  "basic_info": {
+    "name": "Thaddeus Kestrel",
+    "gender": "male",
+    "age": 27,
+    "age_appearance": "looks late 20s, perhaps slightly fatigued",
+    "ethnicity": "Three-quarters Caucasian/Polish, One-quarter Maori",
+    "nationality_origin": "San Francisco, California",
+    "character_classes": ["Paladin", "Pirate", "Starbucks Barista"]
+  },
+  "background": {
+    "background": "Born to a long line of financiers who believed commerce was the highest form of piety, Thaddeus was raised among the towering glass temples of San Francisco's financial district. He received rigorous, high-society training intended to mold him into a beacon of corporate virtue, destined to uphold the legacy of his family's wealth and moral standing. However, a deep yearning for adventure and high-seas freedom clashed with his gilded upbringing, setting him on a path of luxurious self-discovery and spiritual confusion.",
+    "defining_moment": "In a climactic, poorly-planned attempt to steal a vintage espresso machine from a rival coffee guild, Thaddeus dramatically slipped on a puddle of oat milk, leading to his capture and mandatory community service as a certified coffee slinger.",
+    "signature_quote": "My oath is strong, but my venti orders are stronger.",
+    "signature_item": "A solid gold, finely wrought tamper for packing espresso grounds",
+    "signature_pose": "Thaddeus stands bolt upright, right hand resting on the hilt of his ornate cutlass, while his left hand holds the golden espresso tamper aloft, catching the light in a professional, almost reverent manner."
+  },
+  "head": {
+    "face": {
+      "overall_shape": "rectangular",
+      "head_shape": "extremely wide and high, almost block-like",
+      "cheekbones": "sharp and high, creating deep shadows",
+      "cheek_appearance": "slightly sunken, perpetually sun-kissed despite his indoor work",
+      "nose": "broad, high-bridged nose that turns slightly downward at the tip, uncommon for his background",
+      "nose_bridge": "straight and dominant",
+      "lips": "full and slightly downturned, often forming a slight, worried frown",
+      "lip_color": "natural rosy pink",
+      "mouth_size": "average",
+      "teeth": "pearly white and straight, professionally maintained",
+      "facial_markings": null,
+      "visible_skin_condition": "smooth, well-hydrated, showing minimal lines",
+      "facial_expression_resting": "mildly concerned but fundamentally confident"
+    },
+    "eyes": {
+      "color": "hazel",
+      "secondary_color": null,
+      "shape": "deep-set, slightly hooded to convey seriousness",
+      "size": "large and expressive",
+      "pupil_type": "round and normal",
+      "eyelids": "double eyelids, providing visual depth",
+      "eyelashes": "thick and naturally dark"
+    },
+    "eyebrows": {
+      "shape": "thick and bushy, slightly unkempt",
+      "color": "dark brown",
+      "texture": "coarse and prominent",
+      "distance_apart": "average"
+    },
+    "ears": {
+      "shape": "human and rounded",
+      "size": "average",
+      "placement": "normal human placement, close to the head",
+      "color": "skin tone",
+      "piercings": [
+        "small gold hoop earring in the left earlobe, signifying his Pirate class"
+      ]
+    },
+    "hair": {
+      "primary_color": "dark brown",
+      "secondary_colors": ["lighter chestnut streaks"],
+      "color_distribution": "natural sun-kissed highlights throughout the mass of hair",
+      "length": "shoulder-length",
+      "style": "Shoulder-length straight hair styled into a bizarre, highly sculpted, rigid 'helmet' of perfect locks that frames his wide head and narrow face, kept immaculate with expensive product.",
+      "texture": "thick and straight, but artificially stiff",
+      "volume": "thick and dense, contributing to the helmet appearance",
+      "shine": "high gloss, reflecting light intensely",
+      "hair_accessories": null
+    },
+    "facial_hair": "clean shaven, emphasizing the angles of his jaw",
+    "overall_symmetry": "subtly asymmetrical, one eyebrow is slightly higher than the other",
+    "distinctive_marks": null
+  },
+  "body": {
+    "overall_build": "average",
+    "height_cm": 178,
+    "height_description": "average height for a man",
+    "weight_kg": 81,
+    "overall_symmetry": "perfectly symmetrical",
+    "posture": "rigid military stance, betraying his Paladin discipline",
+    "body_language": "confident and slightly ostentatious",
+    "flexibility": "average, slightly stiff due to armor components",
+    "skin_tone": "warm olive with undertones of golden bronze, reflecting the Maori influence, but slightly pale from city life (Caucasian/Polish)",
+    "skin_texture": "smooth and well-cared for",
+    "body_hair": "moderate body hair, typically covered",
+    "clothing_style": "Exotic, high-fashion military-maritime fusion with corporate branding.",
+    "torso": {
+      "build": "athletic, but not excessively bulky",
+      "chest_size": "average, subtly muscular definition visible beneath the fabric",
+      "shoulder_width": "broad and powerful, exaggerated by armor",
+      "waist_size": "thin relative to his shoulder width",
+      "waist_cm": 80,
+      "waist_description": "tapered and slim",
+      "stomach_appearance": "flat and mildly defined",
+      "back_appearance": "muscular and defined 'V' shape",
+      "clothing_upper": "A tailored, fitted doublet made of emerald green Italian silk (Starbucks color), overlaid with premium, polished chrome shoulderplates (Paladin element) featuring embossed mermaid logos (Starbucks logo).",
+      "chest_accessories": [
+        "A large, gold-plated breastplate resembling stylized latte art, secured by black leather straps"
+      ],
+      "torso_modifications": null,
+      "visible_injuries_torso": null
+    },
+    "arms": {
+      "build": "toned",
+      "length": "proportional",
+      "musculature": "lean and wiry, suggesting quick movements",
+      "forearm_appearance": "pale and unmarked",
+      "skin_texture_arms": "smooth",
+      "clothing": "sleeves of the silk doublet are rolled up past the elbow",
+      "arm_accessories": [
+        "Intricate leather bracers studded with dark green jade, matching the outfit's color scheme"
+      ],
+      "arm_modifications": null,
+      "hands": {
+        "size": "medium",
+        "shape": "slender fingers, slightly broad palms, suited for intricate work",
+        "dexterity_appearance": "nimble and quick, highly skilled in precision tasks like latte preparation",
+        "skin_condition_hands": "soft but with slight calluses on the fingertips from manual work",
+        "fingernails": "short and immaculately manicured",
+        "nail_color": "natural pink",
+        "hand_jewelry": [
+          "A heavy signet ring bearing a stylized anchor and coffee bean motif"
+        ],
+        "gloves": "white silk gloves with reinforced leather palms",
+        "dominant_hand": "ambidextrous",
+        "hand_markings": null
+      }
+    },
+    "waist": {
+      "hip_shape": "narrow",
+      "hip_size": "moderate",
+      "clothing_waist": "tailored trousers made of deep navy velvet (Pirate opulence), tucked sharply into high boots",
+      "belt": "A wide, premium black leather belt cinched tight, featuring a massive, oversized brass buckle shaped like a coffee cup",
+      "waist_accessories": [
+        "A scabbard holding an ornate cutlass (Pirate weapon), hanging at the hip"
+      ]
+    },
+    "legs": {
+      "build": "athletic and muscular",
+      "length": "long and elegant",
+      "musculature": "toned thighs and well-developed calves from standing long shifts and climbing rigging",
+      "thigh_appearance": "lean and powerful",
+      "calf_appearance": "well-defined",
+      "skin_texture_legs": "smooth",
+      "clothing_lower": "navy velvet tailored trousers, tucked in",
+      "leg_wear": null,
+      "shoes": "Highly polished, knee-high black leather boots with ornate silver buckles (Pirate/Paladin hybrid), crafted from the finest leather.",
+      "foot_size": "average",
+      "gait": "confident stride, a practiced, slightly exaggerated swagger",
+      "leg_accessories": [
+        "Shin guards made of green enameled metal, subtly integrated into the boot design (Paladin protection/Starbucks color)"
+      ],
+      "leg_modifications": null
+    },
+    "coat_cloak": "A long, flowing cape made of heavy, shimmering black velvet, lined with emerald green satin, draping over the armor plates for dramatic silhouette impact.",
+    "overall_modifications": null,
+    "visible_injuries_overall": null
+  },
+  "visual_design": {
+    "primary_colors": ["#006633", "#1E1E1E", "#FFD700"],
+    "color_scheme_description": "The design is dominated by Starbucks Green (#006633) representing the Barista role and its modern corporate nature. This is contrasted with Deep Black/Navy (1E1E1E) for the Pirate's dramatic flair and the Gold/Brass (FFD700) detailing for the Paladin's expensive, pious dedication. The overall feel is one of expensive, slightly ridiculous corporate zeal.",
+    "notable_visual_features": [
+      "Extremely wide, helmet-like hair volume and large head",
+      "Prominent chrome shoulder armor embossed with corporate logos",
+      "Knee-high leather boots paired with velvet trousers",
+      "The latte art breastplate"
+    ],
+    "visual_themes": [
+      "Corporate Feudalism",
+      "High Seas Opulence",
+      "Sacred Service (to Coffee)"
+    ]
+  },
+  "equipment": {
+    "equipment": [
+      "Set of high-quality coffee beans in a sealed, jeweled pouch",
+      "A ship's navigational astrolabe modified to also measure milk temperature",
+      "Fine linen handkerchiefs"
+    ]
+  }
+}
