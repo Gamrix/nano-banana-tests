@@ -12,6 +12,7 @@ gpt-image-1 is OpenAI's most advanced image generation model that supports:
 import base64
 import os
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Optional, Union
 
@@ -62,6 +63,7 @@ def generate_and_save_image(
     model: str = "gpt-image-1",
     quality: str = "auto",
     background: str = "auto",
+    max_retries: int = 2,
 ) -> str:
     """
     Generate a single image and save it to the specified path using the Image API.
@@ -74,30 +76,54 @@ def generate_and_save_image(
         model: Model to use (default: "gpt-image-1")
         quality: Image quality - "low", "medium", "high", or "auto" (default: "auto")
         background: Background type - "transparent", "opaque", or "auto" (default: "auto")
+        max_retries: Maximum number of retries on failure (default: 2)
 
     Returns:
-        The URL of the generated image
+        The URL or base64 data of the generated image
     """
-    try:
-        response = client.images.generate(
-            model=model,
-            prompt=prompt,
-            n=1,
-            size=size,
-            quality=quality,
-            background=background,
-        )
+    last_error = None
 
-        image_url = response.data[0].url
-        if not image_url:
-            raise ValueError("API returned no image URL")
+    for attempt in range(max_retries + 1):
+        try:
+            # Build params - only include quality/background if model supports them
+            params = {
+                "model": model,
+                "prompt": prompt,
+                "n": 1,
+                "size": size,
+            }
 
-        urllib.request.urlretrieve(image_url, output_path)
+            # gpt-image-1 supports these params, dall-e models might not
+            if model == "gpt-image-1":
+                params["quality"] = quality
+                params["background"] = background
 
-        return image_url
-    except Exception as e:
-        print(f"  ERROR: Failed to generate image: {e}")
-        raise
+            response = client.images.generate(**params)
+
+            # gpt-image-1 returns base64 data, dall-e returns URLs
+            if response.data[0].b64_json:
+                # Decode and save base64 image
+                image_data = base64.b64decode(response.data[0].b64_json)
+                with open(output_path, "wb") as f:
+                    f.write(image_data)
+                return "base64_data_saved"
+            elif response.data[0].url:
+                # Download from URL
+                image_url = response.data[0].url
+                urllib.request.urlretrieve(image_url, output_path)
+                return image_url
+            else:
+                raise ValueError("API returned neither URL nor base64 data")
+
+        except Exception as ex:
+            last_error = ex
+            if attempt < max_retries:
+                print(f"  Attempt {attempt + 1} failed, retrying...")
+            continue
+
+    # All retries exhausted
+    print(f"  ERROR: Failed to generate image after {max_retries + 1} attempts: {last_error}")
+    raise last_error
 
 
 def generate_multiple_images(
@@ -111,9 +137,10 @@ def generate_multiple_images(
     quality: str = "auto",
     background: str = "auto",
     verbose: bool = True,
+    max_workers: int = 5,
 ) -> list[str]:
     """
-    Generate multiple images from the same prompt.
+    Generate multiple images from the same prompt in parallel.
 
     Args:
         client: OpenAI client instance
@@ -126,33 +153,42 @@ def generate_multiple_images(
         quality: Image quality - "low", "medium", "high", or "auto" (default: "auto")
         background: Background type - "transparent", "opaque", or "auto" (default: "auto")
         verbose: Whether to print progress information (default: True)
+        max_workers: Maximum number of parallel workers (default: 5)
 
     Returns:
         List of URLs for all generated images
     """
-    urls = []
+    if verbose:
+        print(f"  Generating {count} images in parallel...")
 
-    for i in range(1, count + 1):
-        if verbose:
-            print(f"  Generating image {i}/{count}...")
-
-        output_path = output_dir / f"{base_name}_{i}.png"
-
+    def generate_single(index: int) -> tuple[int, str | None]:
+        """Helper function to generate a single image"""
+        output_path = output_dir / f"{base_name}_{index}.png"
         try:
-            image_url = generate_and_save_image(
+            result = generate_and_save_image(
                 client, prompt, output_path, size, model, quality, background
             )
-
             if verbose:
-                print(f"  Image URL: {image_url}")
-                print(f"  Saved to: {output_path}")
+                print(f"  ✓ Image {index}/{count} completed")
+            return (index, result)
+        except Exception:
+            if verbose:
+                print(f"  ✗ Image {index}/{count} failed after retries")
+            return (index, None)
 
-            urls.append(image_url)
-        except Exception as e:
-            print(f"  Failed to generate image {i}/{count}, skipping...")
-            continue
+    results = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all tasks
+        futures = {executor.submit(generate_single, i): i for i in range(1, count + 1)}
 
-    return urls
+        # Collect results as they complete
+        for future in as_completed(futures):
+            index, result = future.result()
+            if result:
+                results[index] = result
+
+    # Return results in order
+    return [results[i] for i in range(1, count + 1) if i in results]
 
 
 def generate_from_prompt_list(
