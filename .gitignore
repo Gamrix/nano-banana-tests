@@ -9,3 +9,4 @@ test_notebooks/
 __pycache__/
 .ipynb_checkpoints
 /gen_imgs
+.env

@@ -1,0 +1,17 @@
+[project]
+name = "nano-banana-tests-gpt"
+version = "0.1.0"
+description = "OpenAI GPT image generation tests from Jupyter notebooks"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+gen-code = "code_generation_gpt:__main__"
+gen-character = "character_json_gpt:__main__"
+gen-ip = "ip_bonanza_gpt:__main__"
+gen-system = "system_prompt_gpt:__main__"
+gen-ghibli = "ghibli_style_transfer_gpt:__main__"
+gen-sonic = "ugly_sonic_gpt:__main__"
