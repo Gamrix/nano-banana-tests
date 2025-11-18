@@ -249,7 +249,7 @@ def generate_with_image_input(
     prompt: str,
     input_images: list[Union[str, Path]],
     output_path: Path,
-    model: str = "gpt-4o",
+    model: str = "gpt-5",
     quality: str = "auto",
     input_fidelity: str = "low",
     background: str = "auto",
@@ -266,7 +266,7 @@ def generate_with_image_input(
         prompt: Text prompt for image generation/editing
         input_images: List of paths to input images (up to 4 recommended)
         output_path: Path where the generated image should be saved
-        model: Model to use (e.g., "gpt-4o", "gpt-4.1", "gpt-5") (default: "gpt-4o")
+        model: Model to use (e.g., "gpt-4o", "gpt-4.1", "gpt-5") (default: "gpt-5")
         quality: Image quality - "low", "medium", "high", or "auto" (default: "auto")
         input_fidelity: Input fidelity - "low" or "high" (default: "low")
         background: Background type - "transparent", "opaque", or "auto" (default: "auto")
@@ -324,15 +324,16 @@ def generate_multiple_with_image_input(
     base_name: str,
     output_dir: Path,
     count: int = 5,
-    model: str = "gpt-4o",
+    model: str = "gpt-5",
     quality: str = "auto",
     input_fidelity: str = "low",
     background: str = "auto",
     size: str = "auto",
     verbose: bool = True,
+    max_workers: int = 5,
 ) -> list[str]:
     """
-    Generate multiple images using input images as references.
+    Generate multiple images using input images as references in parallel.
 
     Args:
         client: OpenAI client instance
@@ -341,26 +342,25 @@ def generate_multiple_with_image_input(
         base_name: Base name for output files (will be appended with _1, _2, etc.)
         output_dir: Directory where images should be saved
         count: Number of images to generate (default: 5)
-        model: Model to use (e.g., "gpt-4o", "gpt-4.1", "gpt-5") (default: "gpt-4o")
+        model: Model to use (e.g., "gpt-4o", "gpt-4.1", "gpt-5") (default: "gpt-5")
         quality: Image quality - "low", "medium", "high", or "auto" (default: "auto")
         input_fidelity: Input fidelity - "low" or "high" (default: "low")
         background: Background type - "transparent", "opaque", or "auto" (default: "auto")
         size: Image size like "1024x1024" or "auto" (default: "auto")
         verbose: Whether to print progress information (default: True)
+        max_workers: Maximum number of parallel workers (default: 5)
 
     Returns:
         List of base64-encoded image data
     """
-    results = []
+    if verbose:
+        print(f"  Generating {count} images in parallel...")
 
-    for i in range(1, count + 1):
-        if verbose:
-            print(f"  Generating image {i}/{count}...")
-
-        output_path = output_dir / f"{base_name}_{i}.png"
-
+    def generate_single(index: int) -> tuple[int, str | None]:
+        """Helper function to generate a single image"""
+        output_path = output_dir / f"{base_name}_{index}.png"
         try:
-            image_data = generate_with_image_input(
+            result = generate_with_image_input(
                 client=client,
                 prompt=prompt,
                 input_images=input_images,
@@ -371,13 +371,24 @@ def generate_multiple_with_image_input(
                 background=background,
                 size=size,
             )
-
             if verbose:
-                print(f"  Saved to: {output_path}")
+                print(f"  ✓ Image {index}/{count} completed")
+            return (index, result)
+        except Exception:
+            if verbose:
+                print(f"  ✗ Image {index}/{count} failed")
+            return (index, None)
 
-            results.append(image_data)
-        except Exception as e:
-            print(f"  Failed to generate image {i}/{count}: {e}")
-            continue
+    results = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all tasks
+        futures = {executor.submit(generate_single, i): i for i in range(1, count + 1)}
 
-    return results
+        # Collect results as they complete
+        for future in as_completed(futures):
+            index, result = future.result()
+            if result:
+                results[index] = result
+
+    # Return results in order
+    return [results[i] for i in range(1, count + 1) if i in results]

@@ -32,10 +32,13 @@ Generate a photo featuring the specified person. The photo is taken for a Vanity
 """
 
     print("Generating: Character JSON Attempt #1 (Basic Vanity Fair cover)...")
+    # Switched to auto size as it was cutting off the top of the person's head
     generate_multiple_images(
         client=client,
+        size="auto",
         prompt=prompt1,
-        base_name="character_json_attempt1_basic",
+        quality="high",
+        base_name="character_json_attempt1_basic_auto_size_hq",
         output_dir=output_dir,
         count=5,
     )
@@ -50,12 +53,13 @@ The photo MUST accurately include and display all of the person's attributes fro
 ---
 {char_json_str}
 """
-
     print("Generating: Character JSON Attempt #2 (Detailed with camera specs)...")
     generate_multiple_images(
         client=client,
+        size="auto",
+        quality="high",
         prompt=prompt2,
-        base_name="character_json_attempt2_detailed",
+        base_name="character_json_attempt2_detailed_auto_size_hq",
         output_dir=output_dir,
         count=5,
     )

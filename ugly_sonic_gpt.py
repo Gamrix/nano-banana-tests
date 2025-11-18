@@ -33,16 +33,30 @@ def main():
         },
     ]
 
-    # Check for input images of Ugly Sonic
-    input_dir = Path("input_images")
-    ugly_sonic_images = list(input_dir.glob("ugly_sonic*.jpg")) + list(
-        input_dir.glob("ugly_sonic*.png")
-    )
+    # Check for input images of Ugly Sonic in multiple locations
+    ugly_sonic_images = []
+
+    # Try prompt_imgs first
+    prompt_imgs_dir = Path("prompt_imgs")
+    if prompt_imgs_dir.exists():
+        ugly_sonic_images.extend(list(prompt_imgs_dir.glob("ugly_sonic*.jpg")))
+        ugly_sonic_images.extend(list(prompt_imgs_dir.glob("ugly_sonic*.png")))
+        ugly_sonic_images.extend(list(prompt_imgs_dir.glob("ugly_sonic*.webp")))
+
+    # Try input_images as fallback
+    if not ugly_sonic_images:
+        input_dir = Path("input_images")
+        if input_dir.exists():
+            ugly_sonic_images.extend(list(input_dir.glob("ugly_sonic*.jpg")))
+            ugly_sonic_images.extend(list(input_dir.glob("ugly_sonic*.png")))
+            ugly_sonic_images.extend(list(input_dir.glob("ugly_sonic*.webp")))
 
     if not ugly_sonic_images:
         print("=" * 80)
         print("No Ugly Sonic reference images found!")
         print("Please place Ugly Sonic reference images at:")
+        print("  - prompt_imgs/ugly_sonic_1.webp")
+        print("  - prompt_imgs/ugly_sonic_2.webp")
         print("  - input_images/ugly_sonic_1.jpg")
         print("  - input_images/ugly_sonic_2.jpg")
         print("  - etc.")
@@ -80,7 +94,7 @@ def main():
                 base_name=name,
                 output_dir=output_dir,
                 count=5,
-                model="gpt-4o",
+                model="gpt-5",
                 quality="high",
                 input_fidelity="high",  # High fidelity to preserve character details
             )
